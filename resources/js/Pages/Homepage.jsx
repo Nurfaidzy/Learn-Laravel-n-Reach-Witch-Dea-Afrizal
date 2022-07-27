@@ -8,7 +8,11 @@ export default function Homepage(props) {
         <>
             <Head title={props.title} />
             <Navbar />
-            <NewsList kirim={props.news} />
+            <div className="justify-center items-center flex pt-6">
+                <div className="grid grid-cols-3 items-stretch gap-6">
+                    <NewsList kirim={props.news} />
+                </div>
+            </div>
         </>
     );
 }
