@@ -8,7 +8,7 @@ export default function Homepage(props) {
     return (
         <>
             <Head title={props.title} />
-            <Navbar />
+            <Navbar user={props.auth.user} />
             <div className="justify-center items-center flex pt-6">
                 <div className="grid laptop:grid-cols-3 grid-cols-1 items-stretch gap-6">
                     <NewsList kirim={props.news.data} />

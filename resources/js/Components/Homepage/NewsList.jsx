@@ -1,5 +1,4 @@
 const Datatampil = ({ kirim }) => {
-    console.log(kirim);
     return kirim.map((item, index) => {
         return (
             <>
