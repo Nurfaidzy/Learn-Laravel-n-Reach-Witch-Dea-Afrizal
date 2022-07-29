@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\NewsCollection;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class NewsController extends Controller
@@ -53,6 +54,7 @@ class NewsController extends Controller
         $news->category = $request->category;
         $news->author = auth()->user()->email;
         $news->save();
+        return redirect()->back()->with('massage', 'Berhasil menambahkan berita');
     }
 
     /**
