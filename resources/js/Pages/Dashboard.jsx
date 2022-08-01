@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Authenticated from "@/Layouts/Authenticated";
-import { Head } from "@inertiajs/inertia-react";
+import { Link, Head } from "@inertiajs/inertia-react";
 import { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 
@@ -23,11 +23,8 @@ export default function Dashboard(props) {
         setperingatan(true);
     };
 
-    console.log(props.flash.messages);
-
     const ambildata = () => {
         Inertia.get("/newss");
-        console.log(props.mynews);
     };
 
     useEffect(() => {
@@ -118,7 +115,24 @@ export default function Dashboard(props) {
                                                     <p>{news.deskripsi}</p>
                                                     <div className="card-actions justify-end">
                                                         <div className="badge badge-outline">
-                                                            kategori
+                                                            {news.category}
+                                                        </div>
+                                                        <div className="badge badge-outline">
+                                                            <Link
+                                                                href={route(
+                                                                    "edit.news"
+                                                                )}
+                                                                as="button"
+                                                                method="get"
+                                                                data={{
+                                                                    id: news.id,
+                                                                }}
+                                                            >
+                                                                Edit
+                                                            </Link>
+                                                        </div>
+                                                        <div className="badge badge-outline">
+                                                            Delete
                                                         </div>
                                                     </div>
                                                 </div>

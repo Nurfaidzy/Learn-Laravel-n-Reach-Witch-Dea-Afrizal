@@ -2,7 +2,7 @@ const Datatampil = ({ kirim }) => {
     return kirim.map((item, index) => {
         return (
             <>
-                <div key={item.id}>
+                <div key={index}>
                     <div className="card w-96 bg-base-100 shadow-xl ">
                         <figure>
                             <img

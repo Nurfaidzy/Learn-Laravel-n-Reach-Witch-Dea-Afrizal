@@ -20,9 +20,13 @@ use App\Models\News;
 
 Route::get('/', [NewsController::class, 'index']);
 
-Route::post('/news', [NewsController::class, 'store']);
+Route::post('/news', [NewsController::class, 'store'])->middleware(['auth', 'verified'])->name('create.news');
 
-Route::get('/newss', [NewsController::class, 'show']);
+Route::get('/newss', [NewsController::class, 'show'])->middleware(['auth', 'verified'])->name('my.news');
+
+Route::get('/newss/edit', [NewsController::class, 'edit'])->middleware(['auth', 'verified'])->name('edit.news');
+
+Route::post('/newss/update', [NewsController::class, 'update'])->middleware(['auth', 'verified'])->name('update.news');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

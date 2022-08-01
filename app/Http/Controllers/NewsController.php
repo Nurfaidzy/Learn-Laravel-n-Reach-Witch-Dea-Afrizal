@@ -18,7 +18,7 @@ class NewsController extends Controller
     public function index()
     {
         //
-        $news = new NewsCollection(News::paginate(8));
+        $news = new NewsCollection(News::OrderByDesc('id')->paginate(8));
         return Inertia::render(
             'Homepage',
             [
@@ -83,9 +83,15 @@ class NewsController extends Controller
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
-    public function edit(News $news)
+    public function edit(News $news, Request $request)
     {
         //
+        return Inertia::render(
+            'EditNews',
+            [
+                'newse' => $news->find($request->id)
+            ]
+        );
     }
 
     /**
@@ -98,6 +104,12 @@ class NewsController extends Controller
     public function update(Request $request, News $news)
     {
         //
+        $updatenews = News::where('author', auth()->user()->email)->update([
+            'title' => $request->title,
+            'deskripsi' => $request->deskripsi,
+            'category' => $request->category,
+        ]);
+        return to_route('dashboard')->with('massage', 'Berhasil mengubah berita');
     }
 
     /**
