@@ -104,11 +104,13 @@ class NewsController extends Controller
     public function update(Request $request, News $news)
     {
         //
-        $updatenews = News::where('author', auth()->user()->email)->update([
-            'title' => $request->title,
-            'deskripsi' => $request->deskripsi,
-            'category' => $request->category,
-        ]);
+
+        $updatenews = News::find($request->id);
+        $updatenews->title = $request->title;
+        $updatenews->deskripsi = $request->deskripsi;
+        $updatenews->category = $request->category;
+        $updatenews->author = auth()->user()->email;
+        $updatenews->save();
         return to_route('dashboard')->with('massage', 'Berhasil mengubah berita');
     }
 
@@ -118,8 +120,11 @@ class NewsController extends Controller
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
-    public function destroy(News $news)
+    public function destroy(News $news, Request $request)
     {
         //
+        $news = News::find($request->id);
+        $news->delete();
+        return to_route('dashboard')->with('massage', 'Berhasil menghapus berita');
     }
 }

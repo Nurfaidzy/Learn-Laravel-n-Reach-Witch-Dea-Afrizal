@@ -132,7 +132,18 @@ export default function Dashboard(props) {
                                                             </Link>
                                                         </div>
                                                         <div className="badge badge-outline">
-                                                            Delete
+                                                            <Link
+                                                                href={route(
+                                                                    "delete.news"
+                                                                )}
+                                                                as="button"
+                                                                method="get"
+                                                                data={{
+                                                                    id: news.id,
+                                                                }}
+                                                            >
+                                                                Hapus
+                                                            </Link>
                                                         </div>
                                                     </div>
                                                 </div>
