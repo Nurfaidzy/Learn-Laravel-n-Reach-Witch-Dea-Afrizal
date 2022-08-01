@@ -22,6 +22,8 @@ Route::get('/', [NewsController::class, 'index']);
 
 Route::post('/news', [NewsController::class, 'store']);
 
+Route::get('/newss', [NewsController::class, 'show']);
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

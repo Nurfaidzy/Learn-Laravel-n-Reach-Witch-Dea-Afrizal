@@ -66,6 +66,15 @@ class NewsController extends Controller
     public function show(News $news)
     {
         //
+        $news = News::where('author', auth()->user()->email)->get();
+
+        return Inertia::render(
+            'Dashboard',
+            [
+                'mynews' => $news,
+            ]
+
+        );
     }
 
     /**

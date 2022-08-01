@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Authenticated from "@/Layouts/Authenticated";
 import { Head } from "@inertiajs/inertia-react";
 import { useState } from "react";
@@ -25,6 +25,19 @@ export default function Dashboard(props) {
 
     console.log(props.flash.messages);
 
+    const ambildata = () => {
+        Inertia.get("/newss");
+        console.log(props.mynews);
+    };
+
+    useEffect(() => {
+        if (!props.mynews) {
+            ambildata();
+        } else {
+            console.log("data sudah ada");
+        }
+    }, []);
+
     return (
         <Authenticated
             auth={props.auth}
@@ -36,7 +49,6 @@ export default function Dashboard(props) {
             }
         >
             <Head title="Dashboard" />
-
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -89,6 +101,42 @@ export default function Dashboard(props) {
                             </button>
                         </div>
                     </div>
+                    {props.mynews && (
+                        <div className="flex justify-center">
+                            <div className="grid laptop:grid-cols-3 grid-cols-1 gap-4">
+                                {props.mynews.length > 0 ? (
+                                    props.mynews.map((news, index) => (
+                                        <div className="pt-6" key={index}>
+                                            <div className="card w-96 bg-base-100 shadow-xl ">
+                                                <div className="card-body">
+                                                    <h2 className="card-title">
+                                                        {news.title}
+                                                        <div className="badge badge-secondary">
+                                                            NEW
+                                                        </div>
+                                                    </h2>
+                                                    <p>{news.deskripsi}</p>
+                                                    <div className="card-actions justify-end">
+                                                        <div className="badge badge-outline">
+                                                            kategori
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="pt-4 laptop:pl-[10%] ">
+                                        <div className="bg-white p-4 rounded-xl">
+                                            <div className="text-center">
+                                                Buat berita terdahulu
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </Authenticated>
