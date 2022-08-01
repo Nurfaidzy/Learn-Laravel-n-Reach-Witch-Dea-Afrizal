@@ -20,13 +20,10 @@ export default function Dashboard(props) {
         setTitle("");
         setdeskripsi("");
         setkategori("");
+        setperingatan(true);
     };
 
-    const pesannya = props.flash.messages;
-
-    if (pesannya.length > 0) {
-        setperingatan(true);
-    }
+    console.log(props.flash.messages);
 
     return (
         <Authenticated
@@ -45,10 +42,20 @@ export default function Dashboard(props) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 bg-white border-b border-gray-200 grid grid-cols-1 gap-4">
                             <div>
-                                {peringatan ? (
-                                    <p>{props.flash.messages}</p>
-                                ) : (
-                                    <p></p>
+                                {peringatan && (
+                                    <div className="alert alert-success shadow-lg">
+                                        <div>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="stroke-current flex-shrink-0 h-6 w-6"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            <span>{props.flash.messages}</span>
+                                        </div>
+                                    </div>
                                 )}
                             </div>
                             <input
